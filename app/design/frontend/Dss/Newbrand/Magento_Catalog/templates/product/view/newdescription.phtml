@@ -1,0 +1,13 @@
+<?php
+/**
+ * Custom Product New Description Template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Description
+ */
+
+$product = $block->getProduct();
+$newDescription = $product->getData('newdescription');
+?>
+<?php if (!empty($newDescription)) : ?>
+    <?= /* @noEscape */ $newDescription ?>
+<?php endif; ?>

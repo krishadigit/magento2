@@ -1,0 +1,36 @@
+& when (@media-common = true) {
+    .product.info.detailed {
+        margin-top: 8rem;
+        .product.data.items {
+            text-align: center;
+            .item.title {
+                float: none;
+                display: inline-flex;
+                margin: 0 16px 0 0;
+                .switch {
+                    border: none;
+                    background: none;
+                    font-size: 1.7rem;
+                    border-bottom: none; // remove default underline
+                }
+                &:after {
+                    display: none;
+                }
+            }
+            .item.title.active {
+                .switch {
+                    color: @color-green-3;
+                    border-bottom: 2px solid @color-green-3; // <-- underline visible here
+                }
+            }
+            .item.content {
+                border: none;
+                text-align: left;
+            }
+        }
+    }
+}
+    
+    
+    
+    

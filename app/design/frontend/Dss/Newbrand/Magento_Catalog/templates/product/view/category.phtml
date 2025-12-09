@@ -1,0 +1,26 @@
+<?php
+/** @var $block \Magento\Catalog\Block\Product\View */
+$product = $block->getProduct();
+
+// Load category collection
+$categoryCollection = $product->getCategoryCollection()
+    ->addAttributeToSelect(['name', 'url_key'])
+    ->addIsActiveFilter();
+?>
+
+<?php if ($categoryCollection->getSize()): ?>
+    <div class="product-info-categories">
+        <span class="type label"><?= $escaper->escapeHtml(__('Categories')) ?>:</span>
+
+        <?php
+        $categories = [];
+        foreach ($categoryCollection as $cat) {
+            $categories[] = '<a href="' . $escaper->escapeUrl($cat->getUrl()) . '" class="product-category-link">'
+                            . $escaper->escapeHtml($cat->getName()) .
+                            '</a>';
+        }
+        ?>
+
+        <?= implode(', ', $categories); ?>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <referenceBlock name="product.info.sku" remove="true"/>
+        <move element="product.info.stock.sku" destination="product.info.main" after="product.info.price"/>
+
+        <!-- SOCIAL MEDIA -->
+        <container name="product.info.socialmedia" htmlTag="div" htmlClass="product-info-socialmedia">
+            <block class="Magento\Catalog\Block\Product\View"
+                   name="product.info.socialmedia.block"
+                   template="Magento_Catalog::product/view/socialmedia.phtml"/>
+        </container>
+        <move element="product.info.socialmedia" destination="product.info.main" before="product.info.stock.sku"/>
+
+        <!-- ADD TO CART Override -->
+        <referenceBlock name="product.info.addtocart">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Catalog::product/view/addtocart.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Catalog::product/view/addtocart.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <!-- CUSTOM DESCRIPTION BLOCK (Correct Placement) -->
+       <referenceContainer name="product.info.main">
+        <block class="Magento\Catalog\Block\Product\View"
+            name="product.newdescription"
+            template="Magento_Catalog::product/view/newdescription.phtml"
+            after="product.info.price" />
+        </referenceContainer>   
+
+        <referenceContainer name="product.info.main">
+        <block class="Magento\Catalog\Block\Product\View"
+           name="product.categories.info"
+           template="product/view/category.phtml"
+           after="product.social.links"/>
+        </referenceContainer>
+
+    </body>
+</page>
